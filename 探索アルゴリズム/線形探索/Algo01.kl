@@ -1,0 +1,45 @@
+--* coding: Shift-jis *--
+--
+--  --------------------------------------
+--  Released under the Apache 2.0 License.
+--  Yuki Meguro
+--  --------------------------------------
+
+--  与えられた文字列に対して、特定のワードを線形探索します
+
+PROGRAM Algo01
+%NOPAUSESHFT
+%COMMENT = ''
+CONST
+    RandomVal = '6jjwtyh4t7628e365sdp3grgnwr2xy9g33empbh6xuya74yrbm'
+VAR
+    status: INTEGER
+    word: STRING[128]
+
+    ROUTINE Search(target: STRING; val: STRING): INTEGER
+    VAR
+        i: INTEGER
+    BEGIN
+        FOR i = 1 TO STR_LEN(target) DO
+            IF SUB_STR(target, i, 1) = val THEN
+                RETURN(0)
+            ENDIF
+        ENDFOR
+        RETURN(1)
+    END Search
+
+
+BEGIN
+    -- Initialize
+    WRITE(CHR(137),CHR(128))
+    FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
+    WRITE('Please input a numerical value.', CR)
+    READ(word)
+    status = Search(RandomVal, word)
+    IF status = 0 THEN
+        WRITE('Hit!')
+    ELSE
+        WRITE('No Hit...')
+    ENDIF
+
+END Algo01

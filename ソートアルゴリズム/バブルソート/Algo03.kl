@@ -1,0 +1,56 @@
+--* coding: Shift-jis *--
+--
+--  --------------------------------------
+--  Released under the Apache 2.0 License.
+--  Yuki Meguro
+--  --------------------------------------
+
+--  与えられた数配列に対して、バブルソートを行います
+--  ソート結果の確認はカレル変数で行って下さい
+
+PROGRAM Algo03
+%NOPAUSESHFT
+%COMMENT = ''
+VAR
+    data: ARRAY[15] OF INTEGER
+
+    ROUTINE DataSet
+    BEGIN
+        --好きなIntegerをセット
+        data[1] = 124
+        data[2] = 512
+        data[3] = 13
+        data[4] = 86
+        data[5] = 241
+        data[6] = 312
+        data[7] = 15
+        data[8] = 3
+        data[9] = -1
+        data[10] = 9000
+        data[11] = 1451
+        data[12] = 0
+        data[13] = 310
+        data[14] = 211
+        data[15] = 10000
+    END DataSet
+
+    ROUTINE BubbleSort
+    VAR
+        i,j: INTEGER
+        int_val: INTEGER    -- data[j]退避用 変数
+    BEGIN
+        FOR i = 1 TO ARRAY_LEN(data) DO
+            FOR j = 2 TO (ARRAY_LEN(data) - i) DO
+                IF data[j-1] > data[j] THEN
+                    int_val = data[j]
+                    data[j] = data[j-1]
+                    data[j-1] = int_val
+                ENDIF
+            ENDFOR
+        ENDFOR
+    END BubbleSort
+
+BEGIN
+    DataSet
+    BubbleSort
+END Algo03

@@ -1,0 +1,58 @@
+--* coding: Shift-jis *--
+--
+--  --------------------------------------
+--  Released under the Apache 2.0 License.
+--  Yuki Meguro
+--  --------------------------------------
+
+--  与えられた数配列に対して、選択ソートを行います
+--  ソート結果の確認はカレル変数で行って下さい
+
+PROGRAM Algo04
+%NOPAUSESHFT
+%COMMENT = ''
+VAR
+    data: ARRAY[15] OF INTEGER
+
+    ROUTINE DataSet
+    BEGIN
+        --好きなIntegerをセット
+        data[1] = 124
+        data[2] = 512
+        data[3] = 13
+        data[4] = 86
+        data[5] = 241
+        data[6] = 312
+        data[7] = 15
+        data[8] = 3
+        data[9] = -1
+        data[10] = 9000
+        data[11] = 1451
+        data[12] = 0
+        data[13] = 310
+        data[14] = 211
+        data[15] = 10000
+    END DataSet
+
+    ROUTINE SelectSort
+    VAR
+        i,j: INTEGER
+        min_int: INTEGER    -- 最小値
+        int_val: INTEGER    -- data[min_int]退避用 変数
+    BEGIN
+        FOR i = 1 TO ARRAY_LEN(data) DO
+            min_int = i
+            FOR j = (i+1) TO ARRAY_LEN(data) DO
+                IF data[min_int] > data[j] THEN
+                    min_int = j
+                ENDIF
+            ENDFOR
+            int_val = data[min_int]
+            data[min_int] = data[i]
+            data[i] = int_val
+        ENDFOR
+    END SelectSort
+BEGIN
+    DataSet
+    SelectSort
+END Algo04
